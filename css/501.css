@@ -27,9 +27,9 @@ body {
 }
 
 .not-found-image {
-  background: url(https://fundament.acdh.oeaw.ac.at/common-assets/images/404_image.png);
-  width: 250px;
-  height: 200px;
+  background: url(https://fundament.acdh.oeaw.ac.at/common-assets/images/501_image.png);
+  width: 200px;
+  height: 180px;
   background-repeat: no-repeat;
   background-size: contain;
   margin: 0 auto;
@@ -37,7 +37,7 @@ body {
 
 .error-title {
   color: #fff;
-  font-size: 41px;
+  font-size: 31px;
 }
 
 .error-description {
