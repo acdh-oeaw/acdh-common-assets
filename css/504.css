@@ -26,7 +26,7 @@ body {
   margin: 0 auto;
 }
 
-.not-found-image {
+.error-image {
   background: url(https://fundament.acdh.oeaw.ac.at/common-assets/images/504_image.png);
   width: 200px;
   height: 180px;
@@ -103,7 +103,7 @@ body {
     padding: 20px;
   }
 
-  .not-found-image {
+  .error-image {
     width: 175px;
     height: 137px;
   }

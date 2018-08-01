@@ -11,7 +11,7 @@ var pageContent =
   "elements":[
     {  
       "tag":"div",
-      "class":"not-found-image",
+      "class":"error-image",
     },
     {  
       "tag":"h1",
