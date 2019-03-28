@@ -37,16 +37,16 @@
     The Austrian Centre for Digital Humanities (ACDH) is an OEAW institute founded with the goal to support digital methods in arts and humanities disciplines. The ACDH supports digital research in manifold ways. A Resource Centre for the HumanitiEs (ARCHE) is one of the central services of the ACDH.</p>
     
     <h3>Signing power:</h3>
-    
+
     <p>President: Univ.-Prof. Dr. Anton Zeilinger<br>
     Vice president: Univ.-Doz. Dr. phil. Michael Alram<br>
-    Class presidents: Univ.-Prof. Dr. Brigitte Mazohl, Univ.-Prof. Dipl.-Ing. Dr.techn. Georg Brasseur<br>
+    Class presidents: Univ.-Prof. Dr. phil. Oliver Jens Schmitt, Univ.-Prof. Dipl.-Ing. Dr.techn. Georg Brasseur<br>
     Supervisory body: Academy council.<br>
     For more information, please visit <a href="http://www.oeaw.ac.at/die-oeaw/gremien-der-oeaw/akademierat/">http://www.oeaw.ac.at/die-oeaw/gremien-der-oeaw/akademierat/</a></p>
     
     <h3>Main aim:</h3>
     
-    <p>'.$projectName.' offers stable access to digital research data for the Austrian humanities community.</p>
+    <p>'.$projectName.' offers stable access to digital research services for the Austrian humanities community.</p>
     
     <h3>Disclaimer:</h3>
     
