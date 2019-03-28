@@ -11,6 +11,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <title>Fundament &#8211; Example Imprint Page</title>
     <link rel="stylesheet" id="fundament-styles"  href="https://fundament.acdh.oeaw.ac.at/html/dist/fundament/css/fundament.min.css" type="text/css"/>
+    <script type="text/javascript" src="https://fundament.acdh.oeaw.ac.at/html/dist/fundament/vendor/jquery/jquery.min.js"></script>
   </head>
   <body class="page">
     <div class="hfeed site" id="page">
@@ -65,10 +66,10 @@
                   </header><!-- .entry-header -->
                   <div id="imprint-content" class="entry-content">
                     <script>
-                    var projectName = "VICAV";
-                    var imprintServiceUrl = "https://fundament.acdh.oeaw.ac.at/common-assets/api/imprint.php";
-                    $.get(imprintServiceUrl, projectName, function(response){
-                      $document.getElementById('imprint-content').innerHTML = response;
+                    const params = {"projectName": "VICAV"};
+                    const imprintService = "https://fundament.acdh.oeaw.ac.at/common-assets/api/imprint.php";
+                    $.get(imprintService, params, function(response){
+                      document.getElementById('imprint-content').innerHTML = response;
                     });
                     </script>
                   </div><!-- .entry-content -->
@@ -132,7 +133,6 @@
       </div>
     </div>
     <!-- #page we need this extra closing tag here -->
-    <script type="text/javascript" src="https://fundament.acdh.oeaw.ac.at/html/dist/fundament/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="https://fundament.acdh.oeaw.ac.at/html/dist/fundament/js/fundament.min.js"></script>
   </body>
 </html>
