@@ -16,22 +16,38 @@
       'de' => ' (umgesetzt durch das ACDH in Kooperation mit <strong>'.$projectPartners.'</strong>)',
       'en' => ' (implemented by the ACDH in cooperation with <strong>'.$projectPartners.'</strong>)'
     ];
+
   // Purpose of the project
-  $projectPurpose = filter_input(INPUT_GET, "projectPurpose", FILTER_SANITIZE_STRING);
-    if (is_null($projectPurpose)) $projectPurpose = [
-      'de' => 'der Bereitstellung der aus diesem Projekt hervorgehenden Ergebnisse.',
-      'en' => 'providing information on the results emerging from this project.'
-    ];
-    
+  $projectPurpose = $_GET['projectPurpose'];
+    if (is_null($projectPurpose)) {
+      $projectPurpose = [
+        'de' => 'der Bereitstellung der aus diesem Projekt hervorgehenden Ergebnisse.',
+        'en' => 'providing information on the results emerging from this project.'
+      ];
+    } else {
+      $projectPurpose = [
+        'de' => filter_var($projectPurpose['de'], FILTER_SANITIZE_STRING),
+        'en' => filter_var($projectPurpose['en'], FILTER_SANITIZE_STRING)
+      ];
+    }
+
   // Copyright notice, should be an array as following: ['de' => 'text', 'en' => 'text']
-  $copyrightNotice = filter_input(INPUT_GET, "copyrightNotice", FILTER_SANITIZE_STRING);
-    if (is_null($copyrightNotice)) $copyrightNotice = [
-      'de' => 'Diese Seite und ihre Inhalte sind, sofern nicht anders gekennzeichnet, unter der creative commons Lizenz <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a> International lizensiert (Namensnennung – Weitergabe unter gleichen Bedingungen).',
-      'en' => 'This website and its content is, unless indicated otherwise, licensed under a creative commons <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a> International license (Attribution – Share alike).'
-    ];
+  $copyrightNotice = $_GET['copyrightNotice'];
+    if (is_null($copyrightNotice)) {
+      $copyrightNotice = [
+        'de' => 'Diese Seite und ihre Inhalte sind, sofern nicht anders gekennzeichnet, unter der creative commons Lizenz <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a> International lizensiert (Namensnennung – Weitergabe unter gleichen Bedingungen).',
+        'en' => 'This website and its content is, unless indicated otherwise, licensed under a creative commons <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a> International license (Attribution – Share alike).'
+      ];
+    } else {
+      $copyrightNotice = [
+        'de' => filter_var($copyrightNotice['de'], FILTER_SANITIZE_STRING),
+        'en' => filter_var($copyrightNotice['en'], FILTER_SANITIZE_STRING)
+      ];
+    }
+
   // Piwik trackting, true or false
-  $hasPiwik = filter_input(INPUT_GET, "hasPiwik", FILTER_SANITIZE_STRING);
-    if (is_null($hasPiwik)) $hasPiwik = true;
+  $hasPiwik = filter_input(INPUT_GET, "hasPiwik", FILTER_VALIDATE_BOOLEAN);
+    if (!isset($hasPiwik)) $hasPiwik = true;
     if ($hasPiwik) {
       $piwikNotice = [
         'de' => 'Wir weisen darauf hin, dass zum Zwecke der Systemsicherheit und der Übersicht über das Nutzungsverhalten der Besuchenden im Rahmen von Cookies diverse personenbezogene Daten (Besuchszeitraum, Betriebssystem, Browserversion, innere Auflösung des Browserfensters, Herkunft nach Land, wievielter Besuch seit Beginn der Aufzeichnung) mittels Piwik-Tracking gespeichert werden. Die Daten werden bis auf weiteres gespeichert. Soweit dies erfolgt, werden diese Daten nicht ohne Ihre ausdrückliche Zustimmung an Dritte weitergegeben.',
