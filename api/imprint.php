@@ -11,10 +11,10 @@
   $imprint = generateImprint($projectName);
 
   // Send the response back to the client
-  response(200, $imprint);
+  sendResponse(200, $imprint);
 
   // HTTP response function
-  function response($status, $body) {
+  function sendResponse($status, $body) {
   	header("HTTP/1.1 ".$status);
   	echo $body;
   }
