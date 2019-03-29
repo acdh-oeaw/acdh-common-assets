@@ -5,21 +5,24 @@
   // Handle the request and parameters
   // Impring language, parameters 'de', 'en' or 'both' are accepted 
   $language = filter_input(INPUT_GET, "language", FILTER_SANITIZE_STRING);
-    if (is_null($projectName)) $language = "both";
+    if (is_null($language)) $language = "both";
   // Project name, if empty the imprint text will only say "the project"
   $projectName = filter_input(INPUT_GET, "projectName", FILTER_SANITIZE_STRING);
+    if (is_null($projectName)) $projectName = "";
   // References to project partners
   $projectPartners = filter_input(INPUT_GET, "projectPartners", FILTER_SANITIZE_STRING);
-    if (!is_null($projectPartners)) $projectPartners = [
+    if (is_null($projectPartners)) $projectPartners = ['de' => '','en' => ''];
+    else $projectPartners = [
       'de' => ' (umgesetzt durch das ACDH in Kooperation mit <strong>'.$projectPartners.'</strong>)',
       'en' => ' (implemented by the ACDH in cooperation with <strong>'.$projectPartners.'</strong>)'
-    ]
+    ];
   // Purpose of the project
   $projectPurpose = filter_input(INPUT_GET, "projectPurpose", FILTER_SANITIZE_STRING);
-    if (!is_null($projectPurpose)) $projectPurpose = [
+    if (is_null($projectPurpose)) $projectPurpose = [
       'de' => 'der Bereitstellung der aus diesem Projekt hervorgehenden Ergebnisse.',
       'en' => 'providing information on the results emerging from this project.'
     ];
+    
   // Copyright notice, should be an array as following: ['de' => 'text', 'en' => 'text']
   $copyrightNotice = filter_input(INPUT_GET, "copyrightNotice", FILTER_SANITIZE_STRING);
     if (is_null($copyrightNotice)) $copyrightNotice = [
@@ -33,11 +36,13 @@
       $piwikNotice = [
         'de' => 'Wir weisen darauf hin, dass zum Zwecke der Systemsicherheit und der Übersicht über das Nutzungsverhalten der Besuchenden im Rahmen von Cookies diverse personenbezogene Daten (Besuchszeitraum, Betriebssystem, Browserversion, innere Auflösung des Browserfensters, Herkunft nach Land, wievielter Besuch seit Beginn der Aufzeichnung) mittels Piwik-Tracking gespeichert werden. Die Daten werden bis auf weiteres gespeichert. Soweit dies erfolgt, werden diese Daten nicht ohne Ihre ausdrückliche Zustimmung an Dritte weitergegeben.',
         'en' => 'This is a notice to indicate that for reasons of system security and overview of user behavior, personal data of users of this website (visiting period, operating system, browser version, browser resolution, country of origin, number of visits) will be stored using cookies and <a href="http://piwik.org/">piwik tracking</a>. Data will be stored until further notice. Data will not be disseminated without your explicit consent.'
-      ]
+        ];
+    } else {
+      $piwikNotice = ['de' => '','en' => ''];
     }
 
   // Prepare the HTML output for content
-  $imprint = generateImprint($projectName);
+  $imprint = generateImprint($language, $projectName, $projectPartners, $projectPurpose, $copyrightNotice, $piwikNotice);
 
   // Send the response back to the client
   sendResponse(200, $imprint);
@@ -49,7 +54,7 @@
   }
 
   // Up-to-date imprint content with added parameters
-  function generateImprint($projectName) {
+  function generateImprint($language, $projectName, $projectPartners, $projectPurpose, $copyrightNotice, $piwikNotice) {
     $imprintDE = '
       <div lang="ger">
         <h2>Offenlegung gemäß §§ 24, 25 Mediengesetz und § 5 E-Commerce-Gesetz</h2>
@@ -64,7 +69,7 @@
         <h2>Unternehmensgegenstand</h2>
         <p>Die Österreichische Akademie der Wissenschaften (ÖAW) hat den gesetzlichen Auftrag, die Wissenschaft in jeder Hinsicht zu fördern. Als Gelehrtengesellschaft pflegt die ÖAW den Diskurs und die Zusammenarbeit der Wissenschaft mit Öffentlichkeit, Politik und Wirtschaft.<br/>
             Das Austrian Centre for Digital Humanities (ACDH) ist ein Institut der ÖAW, das mit dem Ziel gegründet wurde, digitale Methoden und Ansätze in den geisteswissenschaftlichen Disziplinen zu fördern. Das ACDH unterstützt digitale Forschung in vielfältiger Weise.<br/>
-            Das Projekt <strong>'.$projectName.'</strong>'.$projectPartners.' widmet sich <strong>'.$projectPurpose.'</strong>
+            Das Projekt <strong>'.$projectName.'</strong>'.$projectPartners['de'].' widmet sich <strong>'.$projectPurpose['de'].'</strong>
         </p>
         <h2>Vertretungsbefugte Organe:</h2>
         <p>
@@ -105,7 +110,7 @@
         <p>
             The Austrian Academy of Sciences (OEAW) has the legal duty to support the sciences and humanities in every respect. As a learned society, the OEAW fosters discourse and cooperation between science and society, politics and economy.<br/>
             The Austrian Centre for Digital Humanities (ACDH) is an OEAW institute founded with the goal to support digital methods in arts and humanities disciplines. The ACDH supports digital research in manifold ways.<br/>
-            The project <strong>'.$projectName.'</strong>'.$projectPartners.' is dedicated to <strong>'.$projectPurpose.'</strong>
+            The project <strong>'.$projectName.'</strong>'.$projectPartners['en'].' is dedicated to <strong>'.$projectPurpose['en'].'</strong>
         </p>
         <h2>Signing power:</h2>
         <p>
