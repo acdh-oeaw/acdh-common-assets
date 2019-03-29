@@ -64,30 +64,23 @@
                   <header class="entry-header">
                     <h1 class="entry-title">Imprint</h1>
                   </header><!-- .entry-header -->
-                  <div id="imprint-content" class="entry-content">
-                    <script>
-                    /**
-                    * Available parameters:
-                    * @param {string} language - Content language, accepts 'de', 'en', 'both'.
-                    * @param {string} projectName - Name of your project.
-                    * @param {string} projectPartners - Name of your project partners.
-                    * @param {Object[]} projectPurpose{'de':'Mein Text', 'en':'My text'} - Purpose of your project.
-                    * @param {Object[]} copyrightNotice{'de':'Mein Text', 'en':'My text'} - Copyright information regarding your project.
-                    * @param {bool} hasPiwik - Whether or not the project uses piwik
-                    */
-                    const params = {
-                      "language": "en",
-                      "projectName": "Fundament",
-                      "projectPurpose": {
-                        "en": "offering a frontend framework for ACDH web applications."
-                      },
-                      "hasPiwik": true
-                    };
-                    const imprintService = "https://fundament.acdh.oeaw.ac.at/common-assets/api/imprint.php";
-                    $.get(imprintService, params, function(response){
-                      document.getElementById('imprint-content').innerHTML = response;
-                    });
-                    </script>
+                  <div class="entry-content">
+                    <div id="imprint-content">
+                      <script type="text/javascript" src="https://fundament.acdh.oeaw.ac.at/html/dist/fundament/vendor/jquery/jquery.min.js"></script>
+                      <script>
+                      const params = {
+                        "language": "en",
+                        "projectName": "Fundament",
+                        "projectPurpose": {
+                          "en": "offering a frontend framework for ACDH web applications."
+                        }
+                      };
+                      const imprintService = "https://fundament.acdh.oeaw.ac.at/common-assets/api/imprint.php";
+                      $.get(imprintService, params, function(response){
+                        document.getElementById('imprint-content').innerHTML = response;
+                      });
+                      </script>
+                    </div><!-- .imprint-content -->
                   </div><!-- .entry-content -->
                 </article>
               </main><!-- #main -->
@@ -145,10 +138,11 @@
       </div>
       <!-- #wrapper-footer-full -->
       <div class="footer-imprint-bar" id="wrapper-footer-secondary" style="text-align:center; padding:0.4rem 0; font-size: 0.9rem;">
-        © Copyright OEAW | <a href="https://www.oeaw.ac.at/die-oeaw/impressum/">Impressum/Imprint</a>
+        © Copyright OEAW | <a href="/imprint">Impressum/Imprint</a>
       </div>
     </div>
     <!-- #page we need this extra closing tag here -->
+    <script type="text/javascript" src="https://fundament.acdh.oeaw.ac.at/html/dist/fundament/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="https://fundament.acdh.oeaw.ac.at/html/dist/fundament/js/fundament.min.js"></script>
   </body>
 </html>
