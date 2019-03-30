@@ -45,20 +45,20 @@
       ];
     }
 
-  // Piwik trackting, true or false
-  $hasPiwik = filter_input(INPUT_GET, "hasPiwik", FILTER_VALIDATE_BOOLEAN);
-    if (!isset($hasPiwik)) $hasPiwik = true;
-    if ($hasPiwik) {
-      $piwikNotice = [
-        'de' => 'Wir weisen darauf hin, dass zum Zwecke der Systemsicherheit und der Übersicht über das Nutzungsverhalten der Besuchenden im Rahmen von Cookies diverse personenbezogene Daten (Besuchszeitraum, Betriebssystem, Browserversion, innere Auflösung des Browserfensters, Herkunft nach Land, wievielter Besuch seit Beginn der Aufzeichnung) mittels Piwik-Tracking gespeichert werden. Die Daten werden bis auf weiteres gespeichert. Soweit dies erfolgt, werden diese Daten nicht ohne Ihre ausdrückliche Zustimmung an Dritte weitergegeben.',
-        'en' => 'This is a notice to indicate that for reasons of system security and overview of user behavior, personal data of users of this website (visiting period, operating system, browser version, browser resolution, country of origin, number of visits) will be stored using cookies and <a href="http://piwik.org/">piwik tracking</a>. Data will be stored until further notice. Data will not be disseminated without your explicit consent.'
+  // Matomo tracking, true or false
+  $hasMatomo = filter_input(INPUT_GET, "hasMatomo", FILTER_VALIDATE_BOOLEAN);
+    if (!isset($hasMatomo)) $hasMatomo = true;
+    if ($hasMatomo) {
+      $matomoNotice = [
+        'de' => 'Wir weisen darauf hin, dass zum Zwecke der Systemsicherheit und der Übersicht über das Nutzungsverhalten der Besuchenden im Rahmen von Cookies diverse personenbezogene Daten (Besuchszeitraum, Betriebssystem, Browserversion, innere Auflösung des Browserfensters, Herkunft nach Land, wievielter Besuch seit Beginn der Aufzeichnung) mittels Matomo-Tracking gespeichert werden. Die Daten werden bis auf weiteres gespeichert. Soweit dies erfolgt, werden diese Daten nicht ohne Ihre ausdrückliche Zustimmung an Dritte weitergegeben.',
+        'en' => 'This is a notice to indicate that for reasons of system security and overview of user behavior, personal data of users of this website (visiting period, operating system, browser version, browser resolution, country of origin, number of visits) will be stored using cookies and <a href="https://matomo.org/">Matomo tracking</a>. Data will be stored until further notice. Data will not be disseminated without your explicit consent.'
         ];
     } else {
-      $piwikNotice = ['de' => '','en' => ''];
+      $matomoNotice = ['de' => '','en' => ''];
     }
 
   // Prepare the HTML output for content
-  $imprint = generateImprint($language, $projectName, $projectPartners, $projectPurpose, $copyrightNotice, $piwikNotice);
+  $imprint = generateImprint($language, $projectName, $projectPartners, $projectPurpose, $copyrightNotice, $matomoNotice);
 
   // Send the response back to the client
   sendResponse(200, $imprint);
@@ -70,7 +70,7 @@
   }
 
   // Up-to-date imprint content with added parameters
-  function generateImprint($language, $projectName, $projectPartners, $projectPurpose, $copyrightNotice, $piwikNotice) {
+  function generateImprint($language, $projectName, $projectPartners, $projectPurpose, $copyrightNotice, $matomoNotice) {
     $imprintDE = '
       <div lang="ger">
         <h2>Offenlegung gemäß §§ 24, 25 Mediengesetz und § 5 E-Commerce-Gesetz</h2>
@@ -104,7 +104,7 @@
         <h3>Urheberrechtlicher Hinweis:</h3>
         <p>'.$copyrightNotice['de'].'</p>
         <h3>Datenschutzrechtlicher Hinweis:</h3>
-        <p>'.$piwikNotice['de'].'<br/>
+        <p>'.$matomoNotice['de'].'<br/>
             Durch die Nutzung der Website erklären Sie sich mit der Art und Weise sowie dem Zweck der Datenverarbeitung einverstanden. Durch eine entsprechende Einstellung in Ihrem Browser können Sie die Speicherung der Cookies verhindern. In diesem Fall stehen Ihnen aber gegebenenfalls nicht alle Funktionen der Website zur Verfügung. <br/>
             Die ausführliche Datenschutzerklärung der ÖAW finden Sie <a href="https://www.oeaw.ac.at/die-oeaw/datenschutz/">hier</a>.
             Die im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten dürfen von Dritten nicht zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien verwendet werden. Einer derartigen Verwendung wird hiermit ausdrücklich widersprochen.
@@ -147,7 +147,7 @@
         <h3>Copyright notice:</h3>
         <p>'.$copyrightNotice['en'].'</p>
         <h3>Data privacy notice:</h3>
-        <p>'.$piwikNotice['en'].'<br/>
+        <p>'.$matomoNotice['en'].'<br/>
             By using this website, you agree to the manner and purposes of data processing. You can disable cookies in your browser settings. However, this might limit functionality of this website.<br/>
             Please find the ÖAW\'s detailed data privacy statement <a href="https://www.oeaw.ac.at/die-oeaw/datenschutz/">here</a>.
             The contact data published in the context of the imprint duty may not be used to send promotional or informational material not explicitly requested. We explicitly disagree with this usage. 
