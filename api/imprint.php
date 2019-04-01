@@ -3,7 +3,7 @@
   header('content-type: text/html; charset=utf-8');
 
   // Handle the request and parameters
-  // Impring language, parameters 'de', 'en' or 'both' are accepted 
+  // Impring language, parameters 'de', 'en' or 'both' are accepted
   $language = filter_input(INPUT_GET, "language", FILTER_SANITIZE_STRING);
     if (is_null($language)) $language = "both";
   // Project name, if empty the imprint text will only say "the project"
@@ -91,7 +91,7 @@
         <p>
             Präsident: Univ.-Prof. Dr. Anton Zeilinger<br/>
             Vizepräsident: Univ.-Doz. Dr. phil. Michael Alram<br/>
-            Klassenpräsidentin: Univ.-Prof. Dr. Brigitte Mazohl, <br/>
+            Klassenpräsident: Univ.-Prof. Dr. phil. Oliver Jens Schmitt, <br/>
             Klassenpräsident: Univ.-Prof. Dipl.-Ing. Dr.techn. Georg Brasseur<br/>
             Als Aufsichtsorgan besteht der Akademierat. Siehe mehr dazu unter <a href="http://www.oeaw.ac.at/die-oeaw/gremien-der-oeaw/akademierat/">http://www.oeaw.ac.at/die-oeaw/gremien-der-oeaw/akademierat/</a>
         </p>
@@ -132,7 +132,7 @@
         <p>
             President: Univ.-Prof. Dr. Anton Zeilinger<br/>
             Vice president: Univ.-Doz. Dr. phil. Michael Alram<br/>
-            Class presidents: Univ.-Prof. Dr. Brigitte Mazohl, Univ.-Prof. Dipl.-Ing. Dr.techn. Georg Brasseur<br/>
+            Class presidents: Univ.-Prof. Dr. phil. Oliver Jens Schmitt, Univ.-Prof. Dipl.-Ing. Dr.techn. Georg Brasseur<br/>
             Supervisory body:  Academy council. For more information, please visit <a href="http://www.oeaw.ac.at/die-oeaw/gremien-der-oeaw/akademierat/">http://www.oeaw.ac.at/die-oeaw/gremien-der-oeaw/akademierat/</a>
         </p>
         <h3>Main aim:</h3>
@@ -150,7 +150,7 @@
         <p>'.$matomoNotice['en'].'<br/>
             By using this website, you agree to the manner and purposes of data processing. You can disable cookies in your browser settings. However, this might limit functionality of this website.<br/>
             Please find the ÖAW\'s detailed data privacy statement <a href="https://www.oeaw.ac.at/die-oeaw/datenschutz/">here</a>.
-            The contact data published in the context of the imprint duty may not be used to send promotional or informational material not explicitly requested. We explicitly disagree with this usage. 
+            The contact data published in the context of the imprint duty may not be used to send promotional or informational material not explicitly requested. We explicitly disagree with this usage.
         </p>
       </div>';
 
