@@ -35,8 +35,8 @@
   $copyrightNotice = $_GET['copyrightNotice'];
     if (is_null($copyrightNotice)) {
       $copyrightNotice = [
-        'de' => 'Diese Seite und ihre Inhalte sind, sofern nicht anders gekennzeichnet, unter der creative commons Lizenz <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a> International lizensiert (Namensnennung – Weitergabe unter gleichen Bedingungen).',
-        'en' => 'This website and its content is, unless indicated otherwise, licensed under a creative commons <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a> International license (Attribution – Share alike).'
+        'de' => 'Diese Seite und ihre Inhalte sind, sofern nicht anders gekennzeichnet, unter der creative commons Lizenz <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> International lizensiert (Namensnennung – Weitergabe unter gleichen Bedingungen).',
+        'en' => 'This website and its content is, unless indicated otherwise, licensed under a creative commons <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> International license (Attribution – Share alike).'
       ];
     } else {
       $copyrightNotice = [
