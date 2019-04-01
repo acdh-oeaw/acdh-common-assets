@@ -112,7 +112,7 @@
     </div>';
 
     $imprintEN = '
-      <div lang="ger">
+      <div lang="en">
         <h2>Legal disclosure according to §§ 24, 25 Austrian media law and § 5 E-Commerce law</h2>
         <h3>Media owner, publisher, responsible for content and editorial office, service provider:</h3>
         <p>
@@ -155,7 +155,7 @@
       </div>';
 
     if ($language == 'both') {
-      return $imprintDE . $imprintEN;
+      return $imprintDE . '<hr/>' . $imprintEN;
     } else if ($language == 'de') {
       return $imprintDE;
     } else if ($language == 'en') {
