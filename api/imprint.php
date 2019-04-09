@@ -27,9 +27,10 @@
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
 
-$config   = (object) yaml_parse_file('config.yaml');
+require_once __DIR__ . '/config.php';
+
 $id       = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-$url      = $config->redmineApiUrl . '/issues/' . $id . '.json';
+$url      = REDMINE_API_URL . '/issues/' . $id . '.json';
 $curl     = curl_init();
 curl_setopt_array($curl, [
     CURLOPT_URL               => $url,
@@ -38,7 +39,7 @@ curl_setopt_array($curl, [
     CURLOPT_RETURNTRANSFER    => true,
     CURLOPT_UNRESTRICTED_AUTH => true,
     CURLOPT_HTTPAUTH          => CURLAUTH_BASIC,
-    CURLOPT_USERPWD           => $config->user . ':' . $config->password,
+    CURLOPT_USERPWD           => REDMINE_USER . ':' . REDMINE_PSWD,
 ]);
 $issue    = json_decode(curl_exec($curl));
 $respCode = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
@@ -69,28 +70,36 @@ if (empty($desc)) {
 }
 
 // for Peter
-if (filter_input(INPUT_GET, 'raw')){
+if (filter_input(INPUT_GET, 'raw')) {
     header('Content-Type: application/json');
     exit(json_encode($desc));
 }
 
-$descMinimal = [
-    'language'           => 'both',
-    'projectName'        => '',
-    'projectPartners'    => '',
-    'projectPurpose'     => '',
+$descDefault = [
+    'language'           => ["en", "de"],
+    'projectNature'      => '',
+    'responsiblePersons' => '',
+    'websiteAim'         => [
+        "en" => "Diese Webseite widmet sich der Bereitstellung der aus diesem Projekt hervorgehenden Ergebnisse.",
+        "de" => "This website is dedicated to providing information on the results emerging from this project."
+    ],
     'copyrightNotice'    => [
         'de' => 'Diese Seite und ihre Inhalte sind, sofern nicht anders gekennzeichnet, unter der creative commons Lizenz <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> International lizensiert (Namensnennung – Weitergabe unter gleichen Bedingungen).',
         'en' => 'This website and its content is, unless indicated otherwise, licensed under a creative commons <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> International license (Attribution – Share alike).'
     ],
-    'hasMatomo'          => false,
+    'hasMatomo'          => true,
+    'matomoNotice'       => [
+        'de' => 'Wir weisen darauf hin, dass zum Zwecke der Systemsicherheit und der Übersicht über das Nutzungsverhalten der Besuchenden im Rahmen von Cookies diverse personenbezogene Daten (Besuchszeitraum, Betriebssystem, Browserversion, innere Auflösung des Browserfensters, Herkunft nach Land, wievielter Besuch seit Beginn der Aufzeichnung) mittels Matomo-Tracking gespeichert werden. Die Daten werden bis auf weiteres gespeichert. Soweit dies erfolgt, werden diese Daten nicht ohne Ihre ausdrückliche Zustimmung an Dritte weitergegeben.',
+        'en' => 'This is a notice to indicate that for reasons of system security and overview of user behavior, personal data of users of this website (visiting period, operating system, browser version, browser resolution, country of origin, number of visits) will be stored using cookies and <a href="https://matomo.org/">Matomo tracking</a>. Data will be stored until further notice. Data will not be disseminated without your explicit consent.'
+    ],
 ];
 // if something is missing in the Redmine, fill with default values
-foreach ($descMinimal as $k => $v) {
+foreach ($descDefault as $k => $v) {
     if (!isset($desc[$k]) || empty($desc[$k])) {
         $desc[$k] = $v;
     }
 }
+
 // sanitize values
 if ($desc['language'] === 'both') {
     $desc['language'] = ['de', 'en'];
@@ -99,11 +108,8 @@ if (!is_array($desc['language'])) {
     $desc['language'] = [$desc['language']];
 }
 
-if (!empty($desc['projectPartners'])) {
-    $desc['projectPartners'] = [
-        'de' => ' (umgesetzt durch das ACDH in Kooperation mit <strong>' . $desc['projectPartners'] . '</strong>)',
-        'en' => ' (implemented by the ACDH in cooperation with <strong>' . $desc['projectPartners'] . '</strong>)'
-    ];
+if (((bool) $desc['hasMatomo']) === false || $desc['hasMatomo'] === 'no') {
+    $desc['matomoNotice'] = '';
 }
 
 foreach ($desc['language'] as $n => $lang) {
