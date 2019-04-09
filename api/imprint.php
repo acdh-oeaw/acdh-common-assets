@@ -29,7 +29,7 @@ header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
 
 require_once __DIR__ . '/config.php';
 
-$id       = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$id       = filter_input(INPUT_GET, 'serviceID', FILTER_SANITIZE_NUMBER_INT);
 $url      = REDMINE_API_URL . '/issues/' . $id . '.json';
 $curl     = curl_init();
 curl_setopt_array($curl, [
