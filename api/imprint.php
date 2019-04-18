@@ -24,10 +24,13 @@
  * THE SOFTWARE.
  * 
  */
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
 
 require_once __DIR__ . '/config.php';
+
+if (SET_CORS_HEADERS) {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
+}
 
 $id       = filter_input(INPUT_GET, 'serviceID', FILTER_SANITIZE_NUMBER_INT);
 $url      = REDMINE_API_URL . '/issues/' . $id . '.json';
