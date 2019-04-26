@@ -96,11 +96,21 @@ $descDefault = [
         'en' => 'This is a notice to indicate that for reasons of system security and overview of user behavior, personal data of users of this website (visiting period, operating system, browser version, browser resolution, country of origin, number of visits) will be stored using cookies and <a href="https://matomo.org/">Matomo tracking</a>. Data will be stored until further notice. Data will not be disseminated without your explicit consent.'
     ],
 ];
+
 // if something is missing in the Redmine, fill with default values
 foreach ($descDefault as $k => $v) {
-    if (!isset($desc[$k]) || empty($desc[$k])) {
-        $desc[$k] = $v;
+  // This will check string paramaters
+  if (!isset($desc[$k]) || empty($desc[$k])) {
+    $desc[$k] = $v;
+  }
+  // This will check array paramaters with language objects inside
+  if(is_array($v)) {
+    foreach ($v as $j => $l) {
+      if (!isset($desc[$k][$j]) || empty($desc[$k][$j])) {
+        $desc[$k][$j] = $l;
+      }
     }
+  }
 }
 
 // In case the output is prefered in only one language
