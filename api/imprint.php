@@ -72,7 +72,7 @@ if (empty($desc)) {
     exit("The Redmine issue does not provide an ImprintParams field\n");
 }
 
-// for Peter
+// In case the output is prefered raw
 if (filter_input(INPUT_GET, 'raw')) {
     header('Content-Type: application/json');
     exit(json_encode($desc));
@@ -101,6 +101,12 @@ foreach ($descDefault as $k => $v) {
     if (!isset($desc[$k]) || empty($desc[$k])) {
         $desc[$k] = $v;
     }
+}
+
+// In case the output is prefered in only one language
+if (filter_input(INPUT_GET, 'outputLang')) {
+  $outputLang = filter_input(INPUT_GET, 'outputLang', FILTER_SANITIZE_STRING);
+  $desc['language'] = [$outputLang];
 }
 
 // sanitize values
