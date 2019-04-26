@@ -9,5 +9,5 @@ Common web assets and templates for the Austrian Centre for Digital Humanities s
 https://shared.acdh.oeaw.ac.at/acdh-common-assets/api/imprint.php?serviceID=9945
 ```
 
-## Documentation on Usage
+### Documentation on Usage
 Please visit https://fundament.acdh.oeaw.ac.at/imprint-service/ for a detailed documentation on how to use this service.
