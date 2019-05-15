@@ -83,8 +83,8 @@ $descDefault = [
     'projectNature'      => '',
     'responsiblePersons' => '',
     'websiteAim'         => [
-        "en" => "Diese Webseite widmet sich der Bereitstellung der aus diesem Projekt hervorgehenden Ergebnisse.",
-        "de" => "This website is dedicated to providing information on the results emerging from this project."
+        "de" => "Diese Webseite widmet sich der Bereitstellung der aus diesem Projekt hervorgehenden Ergebnisse.",
+        "en" => "This website is dedicated to providing information on the results emerging from this project."
     ],
     'copyrightNotice'    => [
         'de' => 'Diese Seite und ihre Inhalte sind, sofern nicht anders gekennzeichnet, unter der creative commons Lizenz <a href="http://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> International lizensiert (Namensnennung).',
