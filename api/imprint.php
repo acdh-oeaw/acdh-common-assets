@@ -99,8 +99,8 @@ $descDefault = [
 
 // if something is missing in the Redmine, fill with default values
 foreach ($descDefault as $k => $v) {
-  // This will check string paramaters
-  if (!isset($desc[$k]) || empty($desc[$k])) {
+  // This will check string paramaters: if undefined or empty string then replace with the default, but if intentionally defined as false (e.g. hasMatomo) then keep it
+  if (!isset($desc[$k]) || (empty($desc[$k]) && $desc[$k] !== false)) {
     $desc[$k] = $v;
   }
   // This will check array paramaters with language objects inside
